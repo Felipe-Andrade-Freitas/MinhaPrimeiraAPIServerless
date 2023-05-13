@@ -21,17 +21,23 @@ jobs:
         with:
           dotnet-version: '7.x'
           
-      - name: Install dependencies
-        run: dotnet restore
+      - name: Install dependencies Test
+        run: dotnet restore .\test\MinhaPrimeiraAPIServerless.Tests\MinhaPrimeiraAPIServerless.Tests.csproj
         
-      - name: Build and test
-        run: dotnet build --configuration Release && dotnet test --no-build --configuration Release
+      - name: Test
+        run: dotnet test .\test\MinhaPrimeiraAPIServerless.Tests\MinhaPrimeiraAPIServerless.Tests.csproj --configuration Release
+        
+      - name: Install dependencies Build
+        run: dotnet restore .\src\MinhaPrimeiraAPIServerless\MinhaPrimeiraAPIServerless.csproj
+        
+      - name: Build
+        run: dotnet build .\src\MinhaPrimeiraAPIServerless\MinhaPrimeiraAPIServerless.csproj --configuration Release
       
       - name: Publish artifact
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: ./bin/Release/net7.0/
+          path: ./src/MinhaPrimeiraAPIServerless/bin/Release/net7.0/
           
   deploy:
     needs: build
@@ -54,4 +60,4 @@ jobs:
         run: dotnet tool install -g Amazon.Lambda.Tools
       
       - name: Deploy to AWS Lambda
-        run: dotnet lambda deploy-serverless -sn MinhaPrimeiraAPIServerless -sb code-pipeline-serveless-dotnet --region us-east-1
+        run: dotnet lambda deploy-serverless -sn MinhaPrimeiraAPIServerless -sb code-pipeline-serveless-dotnet -t .\serverless.template --region us-east-1
