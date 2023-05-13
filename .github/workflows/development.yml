@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: ./bin/Release/net7.0/publish/
+          path: ./bin/Release/net7.0/
           
   deploy:
     needs: build
