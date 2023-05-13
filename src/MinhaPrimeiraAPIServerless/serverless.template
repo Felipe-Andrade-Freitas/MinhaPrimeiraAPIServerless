@@ -7,7 +7,7 @@
       "Type": "AWS::Serverless::Function",
       "Properties": {
         "Handler": "MinhaPrimeiraAPIServerless::MinhaPrimeiraAPIServerless.Functions::Get",
-        "Runtime": "dotnet7",
+        "Runtime": "dotnet6",
         "CodeUri": "",
         "MemorySize": 256,
         "Timeout": 30,
