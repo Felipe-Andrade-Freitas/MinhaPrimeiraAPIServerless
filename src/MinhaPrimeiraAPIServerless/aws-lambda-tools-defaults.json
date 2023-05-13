@@ -1,7 +1,7 @@
 {
   "Information": [],
   "profile": "",
-  "region": "",
+  "region": "us-east-1",
   "configuration": "Release",
   "s3-prefix": "MinhaPrimeiraAPIServerless/",
   "template": "serverless.template",
